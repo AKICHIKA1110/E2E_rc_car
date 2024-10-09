@@ -2,7 +2,9 @@
 
 ステップ 1: JupyterLab のインストール
 Raspberry Pi に JupyterLab がインストールされていない場合、以下のコマンドでインストールしてください
-```pip install jupyterlab```
+```
+pip install jupyterlab
+```
 
 
 ステップ 2: JupyterLab の起動設定ファイルの作成
