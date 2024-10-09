@@ -14,7 +14,7 @@ Raspberry Pi が起動するたびに自動的に JupyterLab を起動するた�
 sudo nano /etc/systemd/system/jupyterlab.service
 ```
 
-サービスファイルに以下の内容を記述
+ステップ 3: jupyterlab.service の設定
 jupyterlab.service ファイルに以下の内容を追加します。/home/pi/ はユーザーのホームディレクトリに置き換えてください。
 ```service:jupyterlab.service
 [Unit]
