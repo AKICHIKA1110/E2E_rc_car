@@ -6,15 +6,17 @@ Raspberry Pi に JupyterLab を以下のコマンドでインストール
 pip install jupyterlab
 ```
 
-
 ステップ 2: JupyterLab の起動設定ファイルの作成
 Raspberry Pi が起動するたびに自動的に JupyterLab を起動するためのシステムサービスを設定します。
 システムサービスファイルの作成
 以下のコマンドを実行して、jupyterlab.service という新しいサービスファイルを作成します。
+```
 sudo nano /etc/systemd/system/jupyterlab.service
+```
 
 サービスファイルに以下の内容を記述
 jupyterlab.service ファイルに以下の内容を追加します。/home/pi/ はユーザーのホームディレクトリに置き換えてください。
+```jupyterlab.service
 [Unit]
 Description=JupyterLab
 After=network.target
@@ -29,7 +31,7 @@ Restart=always
 
 [Install]
 WantedBy=multi-user.target
-
+```
 --ip=0.0.0.0: Raspberry Piの全てのIPアドレスでJupyterLabにアクセス可能にします。
 --port=8888: JupyterLabがポート8888で起動されるように指定しています。
 --no-browser: ブラウザを自動的に開かないように設定します（Raspberry Pi上では必要ないため）。
