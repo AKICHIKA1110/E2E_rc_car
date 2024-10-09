@@ -16,7 +16,7 @@ sudo nano /etc/systemd/system/jupyterlab.service
 
 サービスファイルに以下の内容を記述
 jupyterlab.service ファイルに以下の内容を追加します。/home/pi/ はユーザーのホームディレクトリに置き換えてください。
-```jupyterlab.service
+```service:jupyterlab.service
 [Unit]
 Description=JupyterLab
 After=network.target
