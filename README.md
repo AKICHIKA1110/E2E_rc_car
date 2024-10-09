@@ -32,14 +32,14 @@ Restart=always
 [Install]
 WantedBy=multi-user.target
 ```
---ip=0.0.0.0: Raspberry Piの全てのIPアドレスでJupyterLabにアクセス可能にします。
---port=8888: JupyterLabがポート8888で起動されるように指定しています。
---no-browser: ブラウザを自動的に開かないように設定します（Raspberry Pi上では必要ないため）。
---notebook-dir=/home/pi/notebooks: JupyterLabのルートディレクトリを指定します。このディレクトリを変更したい場合は、任意のパスに変更してください。
-ファイルを保存してエディタを終了します。Ctrl + X、Y、Enter で保存してエディタを閉じます。
+--ip=0.0.0.0: Raspberry Piの全てのIPアドレスでJupyterLabにアクセス可能にします。  
+--port=8888: JupyterLabがポート8888で起動されるように指定しています。  
+--no-browser: ブラウザを自動的に開かないように設定します（Raspberry Pi上では必要ないため）。  
+--notebook-dir=/home/pi/notebooks: JupyterLabのルートディレクトリを指定します。このディレクトリを変更したい場合は、任意のパスに変更してください。  
+ファイルを保存してエディタを終了します。Ctrl + X、Y、Enter で保存してエディタを閉じます。  
 
-サービスを有効化
-以下のコマンドを実行して、作成したサービスを有効化します。
+サービスを有効化  
+以下のコマンドを実行して、作成したサービスを有効化します。  
 
 bash
 コードをコピーする
