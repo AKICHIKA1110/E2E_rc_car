@@ -1,7 +1,7 @@
 # Raspberry PiにJupyter Labを自動起動する方法
 
 ステップ 1: JupyterLab のインストール
-Raspberry Pi に JupyterLab がインストールされていない場合、以下のコマンドでインストールしてください
+Raspberry Pi に JupyterLab を以下のコマンドでインストール
 ```
 pip install jupyterlab
 ```
