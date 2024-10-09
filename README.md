@@ -40,28 +40,26 @@ WantedBy=multi-user.target
 
 サービスを有効化  
 以下のコマンドを実行して、作成したサービスを有効化します。  
-
-bash
-コードをコピーする
+```
 sudo systemctl enable jupyterlab
+```
 サービスを開始
 サービスを手動で開始して、動作確認を行います。
-
-bash
-コードをコピーする
+```
 sudo systemctl start jupyterlab
+```
 ステータスの確認
 JupyterLab が正しく起動しているかを確認するため、以下のコマンドを使用します。
 
-bash
-コードをコピーする
+```
 sudo systemctl status jupyterlab
+```
 ここで、サービスが active (running) となっていることを確認します。
 
 ステップ 4: 自動起動の確認
-Raspberry Pi を再起動して、起動後に http://192.168.11.2:8888 にアクセスできるか確認してください。再起動は以下のコマンドで行えます。
+Raspberry Pi を再起動して、起動後に http://192.168.11.2:8888 
 
-bash
-コードをコピーする
+```
 sudo reboot
+```
 再起動後、ブラウザで http://192.168.11.2:8888 にアクセスすると、JupyterLab が自動的に起動されているはずです。
