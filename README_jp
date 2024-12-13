@@ -33,3 +33,16 @@ PyTorchでGPUが使用可能か確認する：
 ```python
 import torch
 print(torch.cuda.is_available())  # Trueが返されればGPUが使用可能
+```
+### Tensorflow
+TensorFlowでGPUが使用可能か確認する：
+```python
+import tensorflow as tf
+print(tf.config.list_physical_devices('GPU'))  # 利用可能なGPUがリスト表示される
+```
+### MATLAB
+MATLABでGPUが使用可能か確認する：
+```matlab
+gpuDeviceCount   % GPUの数を表示
+gpuDevice(1)     % 最初のGPUの詳細を表示
+```
