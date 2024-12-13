@@ -39,3 +39,9 @@ To verify GPU support in Tensorflow:
 import tensorflow as tf
 print(tf.config.list_physical_devices('GPU'))  # Should list available GPUs
 ```
+### MATLAB
+To verify GPU support in MATLAB:
+```matlab
+gpuDeviceCount   % Displays the number of GPUs
+gpuDevice(1)     % Displays details about the first GPU
+```
