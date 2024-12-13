@@ -6,7 +6,7 @@ This document provides a compatibility table for PyTorch 2.5.1, TensorFlow 2.14.
 
 | Software         | Version          | Supported CUDA Versions | Notes                                                                                   |
 |------------------|------------------|-------------------------|-----------------------------------------------------------------------------------------|
-| **PyTorch**      | 2.5.1            | 11.8, 12.1, 12.4        | PyTorch 2.5.1 supports CUDA 11.8, 12.1, and 12.4. [Learn more](https://pytorch.org/get-started/locally/) |
+| **PyTorch**      | 2.5.1            | 11.8, 12.1, 12.4        | PyTorch 2.5.1 supports CUDA 11.8, 12.1, and 12.4. [PyTorch Website](https://pytorch.org/get-started/locally/) |
 | **TensorFlow**   | 2.14.0           | 11.8                    | TensorFlow 2.14.0 supports CUDA 11.8.                                                   |
 | **MATLAB**       | R2023b           | 11.8                    | MATLAB R2023b supports CUDA 11.8.                                                      |
 
@@ -32,4 +32,10 @@ To verify GPU support in PyTorch:
 ```python
 import torch
 print(torch.cuda.is_available())  # Should return True
+```
+### Tensorflow
+To verify GPU support in Tensorflow:
+```python
+import tensorflow as tf
+print(tf.config.list_physical_devices('GPU'))  # Should list available GPUs
 ```
