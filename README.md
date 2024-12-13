@@ -21,7 +21,7 @@ To ensure compatibility across all tools, the following setup is recommended:
 ## Notes
 
 1. Ensure the correct version of CUDA and cuDNN is installed based on your software stack.
-2. For PyTorch installation, visit the [official guide](https://pytorch.org/get-started/locally/).
+2. For PyTorch installation.
 3. MATLAB R2023b supports CUDA 11.8; ensure you have Parallel Computing Toolbox installed for GPU support.
 4. TensorFlow 2.14.0 requires CUDA 11.8 and cuDNN 8.6 for GPU acceleration.
 
