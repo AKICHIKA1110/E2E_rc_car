@@ -11,6 +11,7 @@ class ControllerNode(Node):
         super().__init__('controller_node')
         self.k = self.declare_parameter('k', 0.4).value
         self.v = self.declare_parameter('v', 1.0).value
+        self.bag_dir = self.declare_parameter('bag_dir', os.path.join(os.path.expanduser("~"), "Desktop")).value
         self.publisher_ = self.create_publisher(Twist, '/cmd_vel', 10) #Buffer 10
         self.is_running = False
         self.bag_process = None  # rosbagプロセスを管理する変数
@@ -22,8 +23,10 @@ class ControllerNode(Node):
 
     def start_rosbag(self):
         # rosbag記録プロセスを開始
+        bag_path = os.path.join(self.bag_dir, "robot_data_bag")
+        
         self.bag_process = subprocess.Popen(
-            ['ros2', 'bag', 'record', '-o', 'robot_data_bag', '/cmd_vel', '/camera/image_raw', '/wheel_speeds'],
+            ['ros2', 'bag', 'record', '-o', 'bag_path', '/cmd_vel', '/camera/image_raw', '/wheel_speeds'],
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE
         )
