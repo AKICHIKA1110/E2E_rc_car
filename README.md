@@ -78,7 +78,7 @@ Visual Studio Code (ARM版) の .deb パッケージを [公式サイト](https:
 ダウンロードしたファイルが例えば `~/Downloads/code-[XXXX]-[XXXXXXXXXXXX]_arm64.deb` にある場合、以下のコマンドを実行します：
 
 ```bash
-sudo dpkg -i ~/Downloads/code-arm64.deb
+sudo dpkg -i ~/Downloads/code-[XXXX]-[XXXXXXXXXXXX]_arm64.deb
 sudo apt --fix-broken install
 ```
 
