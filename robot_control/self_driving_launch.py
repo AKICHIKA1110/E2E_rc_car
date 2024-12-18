@@ -5,6 +5,13 @@ def generate_launch_description():
     return LaunchDescription([
         Node(
             package='my_robot_package',
+            executable='controller_node',
+            name='controller_node',
+            output='screen',
+            parameters=[{'k': 0.1}, {'v': 0.4}]
+        ),
+        Node(
+            package='my_robot_package',
             executable='motor_node',
             name='motor_node',
             output='screen'
