@@ -72,7 +72,7 @@ sudo apt install -y python3-colcon-common-extensions
 Raspberry Pi 用の Visual Studio Code をインストールするには、以下の手順を実行します。
 
 ### ARM 用の .deb パッケージをダウンロード
-Visual Studio Code (ARM版) の .deb パッケージを [公式サイト](https://https://code.visualstudio.com/Download) から取得してください。
+Visual Studio Code (ARM版) の .deb パッケージを [公式サイト](https://code.visualstudio.com/Download#) から取得してください。
 
 ### インストール
 ダウンロードしたファイルが例えば `~/Downloads/code-[XXXX]-[XXXXXXXXXXXX]_arm64.deb` にある場合、以下のコマンドを実行します：
