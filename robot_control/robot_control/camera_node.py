@@ -8,6 +8,7 @@ import time
 class CameraNode(Node):
     def __init__(self):
         super().__init__('camera_node')
+        self.fps = self.declare_parameter('fps', 30).value  # パラメータ`fps`を宣言し、デフォルト値を30に設定
         self.publisher_ = self.create_publisher(Image, '/camera/image_raw', 10)
         self.bridge = CvBridge()
 
@@ -15,7 +16,7 @@ class CameraNode(Node):
         self.cap = cv2.VideoCapture(0)
         self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
         self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
-        self.cap.set(cv2.CAP_PROP_FPS, 30)
+        self.cap.set(cv2.CAP_PROP_FPS, self.fps)
 
         # タイマーで周期実行
         self.timer = self.create_timer(1.0/30.0, self.timer_callback)
@@ -25,8 +26,8 @@ class CameraNode(Node):
         if not ret:
             self.get_logger().error("Failed to capture frame from camera.")
             return
-        # 必要ならresize
-        # frame = cv2.resize(frame, (160,120))
+        
+        frame = cv2.resize(frame, (160,120))
         img_msg = self.bridge.cv2_to_imgmsg(frame, encoding='bgr8')
         self.publisher_.publish(img_msg)
 

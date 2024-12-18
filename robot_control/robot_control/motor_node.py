@@ -64,6 +64,7 @@ class MotorNode(Node):
             GPIO.output(self.IN4, False)
 
     def cmd_vel_callback(self, msg):
+        
         # msg.linear.xが前進速度v、msg.angular.zが旋回指令wと仮定
         v = msg.linear.x
         w = msg.angular.z
@@ -76,6 +77,7 @@ class MotorNode(Node):
 
         # Vr, VlをPublish
         wheel_msg = Twist()
+
         # linear.x = Vl, linear.y = Vrとして格納
         wheel_msg.linear.x = Vl
         wheel_msg.linear.y = Vr

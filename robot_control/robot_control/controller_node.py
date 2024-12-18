@@ -4,14 +4,37 @@ from geometry_msgs.msg import Twist
 import pygame
 import threading
 import time
+import subprocess
 
 class ControllerNode(Node):
     def __init__(self):
         super().__init__('controller_node')
-        self.publisher_ = self.create_publisher(Twist, '/cmd_vel', 10)
+        self.k = self.declare_parameter('k', 0.4).value
+        self.v = self.declare_parameter('v', 1.0).value
+        self.publisher_ = self.create_publisher(Twist, '/cmd_vel', 10) #Buffer 10
         self.is_running = False
+        self.bag_process = None  # rosbagプロセスを管理する変数
         self.thread = threading.Thread(target=self.joystick_loop)
         self.thread.start()
+
+        # rosbagを開始
+        self.start_rosbag()
+
+    def start_rosbag(self):
+        # rosbag記録プロセスを開始
+        self.bag_process = subprocess.Popen(
+            ['ros2', 'bag', 'record', '-o', 'robot_data_bag', '/cmd_vel', '/camera/image_raw', '/wheel_speeds'],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE
+        )
+        self.get_logger().info("rosbag recording started")
+
+    def stop_rosbag(self):
+        # rosbag記録プロセスを終了
+        if self.bag_process:
+            self.bag_process.terminate()
+            self.bag_process.wait()
+            self.get_logger().info("rosbag recording stopped")
 
     def joystick_loop(self):
         pygame.init()
@@ -21,38 +44,38 @@ class ControllerNode(Node):
             return
         joystick = pygame.joystick.Joystick(0)
         joystick.init()
-        
-        v = 1.0
-        k = 0.4
 
         while rclpy.ok():
-            # イベント取得
             for event in pygame.event.get():
                 if event.type == pygame.JOYBUTTONDOWN:
-                    # ボタン割り当てはコントローラによる
-                    if event.button == 3:  # e.g. stop
+                    if event.button == 3:  # □ボタンで停止
                         self.is_running = False
-                    elif event.button == 0:  # start
-                        self.is_running = True
-                    elif event.button == 1:  # exit or shutdown
+                    elif event.button == 0:  # ×ボタンでrosbag停止 & ノード終了
+                        self.get_logger().info("×ボタンが押されました。プログラムを終了します。")
+                        self.stop_rosbag()
                         rclpy.shutdown()
                         return
+                    elif event.button == 1:  # ○ボタンで開始
+                        self.is_running = True
 
             if self.is_running:
                 w = -joystick.get_axis(0)
                 w = round(w, 2)
-                Vr = v + k * w
-                Vl = v - k * w
+                Vr = self.v + self.k * w
+                Vl = self.v - self.k * w
                 Vr = min(Vr, 1.0)
                 Vl = min(Vl, 1.0)
 
                 msg = Twist()
-                # linear.xを両車輪の平均速度に、angular.zを左右差から計算した値として割り当てる例
                 msg.linear.x = (Vl + Vr) / 2.0
                 msg.angular.z = w
                 self.publisher_.publish(msg)
 
-            time.sleep(0.05) # 少し待つ
+            time.sleep(0.05)  # 少し待つ
+
+    def destroy_node(self):
+        self.stop_rosbag()
+        super().destroy_node()
 
 def main(args=None):
     rclpy.init(args=args)
@@ -61,8 +84,9 @@ def main(args=None):
         rclpy.spin(node)
     except KeyboardInterrupt:
         pass
-    node.destroy_node()
-    rclpy.shutdown()
+    finally:
+        node.destroy_node()
+        rclpy.shutdown()
 
 if __name__ == '__main__':
     main()
