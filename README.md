@@ -83,7 +83,22 @@ sudo apt --fix-broken install
 ```
 
 これで Visual Studio Code のインストールが完了します。
+### ROS2で`robot_control`をビルドして実行する手順
 
+#### ビルド手順
+
+以下のコマンドを実行して、ROS2ワークスペースをビルドします。
+```bash
+cd ~/ros2_ws
+colcon build
+source install/setup.bash
+```
+実行方法
+
+以下のコマンドを実行して、`robot_control_node`を実行します。
+```bash
+ros2 run robot_control robot_control_node
+```
 ---
 
 これで ROS 2 の環境設定が完了しました。問題が発生した場合は、公式の [ROS 2 ドキュメント](https://docs.ros.org/en/humble/index.html) を参照してください。
