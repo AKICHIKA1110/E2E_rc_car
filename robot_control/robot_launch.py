@@ -10,8 +10,9 @@ def generate_launch_description():
             executable='controller_node',
             name='controller_node',
             output='screen',
-            parameters=[{'k': 0.1}, {'v': 0.4}]
-        ),
+            parameters=[{'k': 0.1}, 
+                        {'v': 0.4},
+                        {'bag_dir': '/media/external_drive/rosbag_data'}]
         # Motor Node
         Node(
             package='my_robot_package',
